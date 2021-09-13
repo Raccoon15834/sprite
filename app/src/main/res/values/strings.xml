@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">BtnLayoutMaze</string>
+    <string name="longQuote">
+        “That’s why New York is so great, though. Everyone you care about can\n despise you and you can still find a bagel so good,\n nothing else matters. Who needs love when you’ve got lox? They both stink, but only one tastes good.”\n —Midge Maisel (Rachel Brosnahan), The Marvelous Mrs. Maisel
+    </string>
+    <string name="greeting1">Ellooo</string>
+    <string name="greeting2">whassup!</string>
+    <string name="greeting3">Greetings!</string>
+    <string name="greeting4">long time no see!</string>
 </resources>
