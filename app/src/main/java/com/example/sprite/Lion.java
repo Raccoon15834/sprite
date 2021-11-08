@@ -17,9 +17,20 @@ public class Lion extends RectF {
         this(1, 1, 1, 1, 1, 1);
     }
     //can reuse your own construc tor in other custom constructors (kind of like super)
-    public void moveLeft(){
-        offset(SPEED, SPEED);
+    public void left(){
+        offset(-SPEED, 0);
+        //automatically adjusts draw frame???
     }
+    public void right(){
+        offset(SPEED, 0);
+    }
+    public void up(){
+        offset(0, -SPEED);
+    }
+    public void down(){
+        offset(0, SPEED);
+    }
+
     public void draw(Canvas canvas){
 
     }

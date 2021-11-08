@@ -8,6 +8,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 public class MyCanvas extends View {
+
     Lion mL;
     public MyCanvas(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -24,8 +25,12 @@ public class MyCanvas extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         mL.draw(canvas);
-        mL.moveLeft();
+        //TODO draw wavy trees in back ground
+        //Add areas
         invalidate();
+    }
+    public Lion getLion() {
+        return mL;
     }
 }
 //dark cozy forest backdrop
