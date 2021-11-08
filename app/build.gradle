@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.example.btnlayoutmaze"
+        applicationId "com.example.sprite"
         minSdkVersion 16
         targetSdkVersion 31
         versionCode 1

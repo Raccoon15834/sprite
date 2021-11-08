@@ -1,4 +1,4 @@
-package das.anusha.firstapp;
+package com.example.sprite;
 
 import androidx.appcompat.app.AppCompatActivity;
 

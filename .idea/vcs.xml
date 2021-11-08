@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="VcsDirectoryMappings">
-    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/BtnMaze" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/CoonWhisperer-master/CoonWhisperer-master" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/FirstApp2.0-master" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/LifecycleTracker" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/PrefsLab" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/WidgetCollage" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/WordSwiper" vcs="Git" />
   </component>
 </project>
