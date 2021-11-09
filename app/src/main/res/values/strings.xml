@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">sprite</string>
+    <string name="paintActivityLabel">Painter</string>
 </resources>

@@ -2,6 +2,7 @@ package com.example.sprite;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -24,6 +25,7 @@ public class MyCanvas extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        //canvas.drawColor(Color.GREEN);
         mL.draw(canvas);
         //TODO draw wavy trees in back ground
         //Add areas
