@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 public class MyCanvas extends View {
 
-    Lion mL;
+    Croc mL;
     public MyCanvas(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
@@ -19,7 +19,7 @@ public class MyCanvas extends View {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
         //can use percentage of getWidth, getHeight
-        mL = new Lion();
+        mL = new Croc(getResources());
     }
 
     @Override
@@ -31,7 +31,7 @@ public class MyCanvas extends View {
         //Add areas
         invalidate();
     }
-    public Lion getLion() {
+    public Croc getLion() {
         return mL;
     }
 }
