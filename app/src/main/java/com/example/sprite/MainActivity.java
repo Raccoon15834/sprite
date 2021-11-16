@@ -27,16 +27,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpArrows() {
         tArr = (ImageView) findViewById(R.id.toptri);
-        bArr = (ImageView) findViewById(R.id.bottom);
+        bArr = (ImageView) findViewById(R.id.bottri);
         rArr = (ImageView) findViewById(R.id.righttri);
         lArr = (ImageView) findViewById(R.id.lefttri);
         int centerX = tArr.getDrawable().getBounds().width()/2;
         int centerY = tArr.getDrawable().getBounds().height()/2;
-        //rotate arrows
-        Matrix matrix = new Matrix();
-        bArr.setScaleType(ImageView.ScaleType.MATRIX);
-        matrix.postRotate(180f, centerX, centerY);
-        bArr.setImageMatrix(matrix);
+//        Matrix matrix = new Matrix();
+//        bArr.setScaleType(ImageView.ScaleType.MATRIX);
+//        matrix.postRotate(180f, centerX, centerY);
+//        bArr.setImageMatrix(matrix);
 
         myArrowListener myListener = new myArrowListener();
         tArr.setOnTouchListener(myListener);
@@ -54,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private class myArrowListener implements View.OnTouchListener {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
+            mL = scrn.getCroc();
             ImageView editedV = (ImageView)findViewById(v.getId());
             if(event.getAction() == MotionEvent.ACTION_DOWN) {
                 editedV.setImageResource(R.drawable.arrowselect);
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 if(editedV.equals(rArr)) mL.left();
                 if(editedV.equals(lArr)) mL.right();
             } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                editedV.setImageResource(R.drawable.arrowselect);
+                editedV.setImageResource(R.drawable.arrow);
             }
             return true;
         }
