@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         scrn = (MyCanvas)  findViewById(R.id.scrn);
 
-        setUpArrows();//TODO rotate arrow images
+        setUpArrows();//TODO rotate arrow images, make movement continuous
     }
 
     private void setUpArrows() {
@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
                 editedV.setImageResource(R.drawable.arrowselect);
                 if(editedV.equals(tArr)) mL.up();
                 if(editedV.equals(bArr)) mL.down();
-                if(editedV.equals(rArr)) mL.left();
-                if(editedV.equals(lArr)) mL.right();
+                if(editedV.equals(rArr)) mL.right();
+                if(editedV.equals(lArr)) mL.left();
             } else if (event.getAction() == MotionEvent.ACTION_UP) {
                 editedV.setImageResource(R.drawable.arrow);
             }
