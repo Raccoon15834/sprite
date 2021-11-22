@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
@@ -19,7 +20,9 @@ public class MyCanvas extends View {
     Croc mL;
     Cloud[] clouds;
     Resources res  = getResources();
-    VectorDrawableCompat[] myBg;//todo wind affect, and moving clouds
+    VectorDrawableCompat island1, island2, ladder;
+    VectorDrawableCompat[] myBg;//todo wind affect
+
     public MyCanvas(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
@@ -30,33 +33,42 @@ public class MyCanvas extends View {
         //can use percentage of getWidth, getHeight
         int w = getWidth();
         int h = getHeight();
-        mL = new Croc(getResources(), 0, h/5);//sets top left corner
         clouds = new Cloud[7];
         for(int i=0; i<clouds.length; i++) clouds[i] = new Cloud(w, h);
 
-        VectorDrawableCompat island1 = VectorDrawableCompat.create(res, R.drawable.ic_island1, null);
+        island1 = VectorDrawableCompat.create(res, R.drawable.ic_island1, null);
         island1.setBounds(w/6, h/8, w/6+island1.getMinimumWidth()/2, h/8+island1.getMinimumHeight()/2);
-        VectorDrawableCompat island2 = VectorDrawableCompat.create(res, R.drawable.ic_island2, null);
+        island2 = VectorDrawableCompat.create(res, R.drawable.ic_island2, null);
         island2.setBounds(0, 5*h/8, 0+island2.getMinimumWidth()/2, 5*h/8+island2.getMinimumHeight()/2);
-        VectorDrawableCompat ladder = VectorDrawableCompat.create(res, R.drawable.ic_ladder, null);
-        ladder.setBounds(w/3, 1*h/5, w/4, 3*h/4);//todo set bounds
         VectorDrawableCompat palmtree = VectorDrawableCompat.create(res, R.drawable.ic_palmtree, null);
         int ih= island1.getIntrinsicHeight();
-        int iw= island1.getIntrinsicHeight();
-        palmtree.setBounds(island1.getBounds().left, island1.getBounds().top, 3*w/4-100, island1.getBounds().top+ih);//todo set bounds
+        int iw= island1.getIntrinsicWidth();
+        palmtree.setBounds(island1.getBounds().left, island1.getBounds().top-ih/15, island1.getBounds().left+iw/5,
+                island1.getBounds().top+4*ih/15);
+        ladder = VectorDrawableCompat.create(res, R.drawable.ic_ladder, null);
+        ladder.setBounds(island1.getBounds().right-iw/5, island1.getBounds().top + ih/6,
+                island1.getBounds().right, island2.getBounds().top+ ih/6);//todo set bounds
 
-        myBg = new VectorDrawableCompat[]{island1, island2, ladder, palmtree};
+        myBg = new VectorDrawableCompat[]{palmtree, island1, island2, ladder};
+        mL = new Croc(getResources(), island1.getBounds().left + iw/15, island1.getBounds().top +ih/8,
+                island1, island2, ladder);//sets top left corner
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        mL.draw(canvas);
-        //Add areas todo fix number, size and vertical range of clouds
-        //todo add music
         for(int i=0; i<=clouds.length/2; i++) clouds[i].draw(canvas);
         for(VectorDrawableCompat i: myBg) i.draw(canvas);
+        mL.draw(canvas);
         for(int i=clouds.length/2+1; i<clouds.length; i++) clouds[i].draw(canvas);
+
+
+//        VectorDrawableCompat i1 = island1;
+//        int w = i1.getIntrinsicWidth();
+//        int h = i1.getIntrinsicHeight();
+//        Rect i1bounds = i1.getBounds();
+//        canvas.drawCircle(40, 40, 50, new Paint(Color.GREEN));
+//        canvas.drawRect(i1bounds.left, i1bounds.top, i1bounds.left+50, i1bounds.top + 50, new Paint(Color.BLUE));
         invalidate();
     }
     public Croc getCroc() {
@@ -75,7 +87,7 @@ public class MyCanvas extends View {
             bottom = top + bmp.getHeight()/20;
             right = left + bmp.getWidth()/4;
             myForm = (int)(1+Math.random()*5);//5 different cloud shapes
-            speed = (int)(2+Math.random()*4);//speed 2-6
+            speed = (int)(1+Math.random()*3);//speed 2-6
         }
         public void draw(Canvas c){
             Rect src = new Rect(0, (myForm-1)*bmp.getHeight()/5,
@@ -86,7 +98,5 @@ public class MyCanvas extends View {
         }
     }
 }
-//dark cozy forest backdrop
-//move lion floating toggle button in bottom right corner
 
 //once lands on a letter takes you to canvas to draw with "pencil" letter

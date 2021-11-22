@@ -1,10 +1,13 @@
 package com.example.sprite;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import android.content.Intent;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.drawable.VectorDrawable;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.DragEvent;
@@ -21,8 +24,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         scrn = (MyCanvas)  findViewById(R.id.scrn);
+        startPaint();
 
-        setUpArrows();//TODO rotate arrow images, make movement continuous
+        setUpArrows();//TODO rotate arrow images, fix restrictions, switch screen
+        //TODO  add letter r bmp, check how to start paint activity
     }
 
     private void setUpArrows() {
@@ -55,18 +60,32 @@ public class MainActivity extends AppCompatActivity {
         public boolean onTouch(View v, MotionEvent event) {
             mL = scrn.getCroc();
             ImageView editedV = (ImageView)findViewById(v.getId());
-            if(event.getAction() == MotionEvent.ACTION_DOWN) {
+            if(event.getAction() == MotionEvent.ACTION_DOWN) {//
                 editedV.setImageResource(R.drawable.arrowselect);
-                if(editedV.equals(tArr)) mL.up();
-                if(editedV.equals(bArr)) mL.down();
-                if(editedV.equals(rArr)) mL.right();
+                if(editedV.equals(tArr) ) {
+                    mL.up();
+                    checkCrocAtHut(scrn.island1);
+                }
+                if(editedV.equals(bArr) ) mL.down();
+                if(editedV.equals(rArr))mL.right();
                 if(editedV.equals(lArr)) mL.left();
             } else if (event.getAction() == MotionEvent.ACTION_UP) {
                 editedV.setImageResource(R.drawable.arrow);
+                mL.stopMoving();
             }
             return true;
         }
     }
+    private void checkCrocAtHut(VectorDrawableCompat i1) {
+        int w = i1.getIntrinsicWidth();
+        int h = i1.getIntrinsicHeight();
+        Rect i1bounds = i1.getBounds();
+        if (mL.contains(i1bounds.left+w/4, i1bounds.top + h/2)){
+            mL.currFace = mL.BACKFACE;
+            startPaint();
+        }
+    }
+
 
 
     //Drag Event, MotionEvent
