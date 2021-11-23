@@ -28,7 +28,7 @@ public class PaintActivity extends Activity {
             public void onClick(View view) {
                 if(scrn.checkAnswer()){
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
+                    startActivity(intent);//todo put back
                 }else scrn.clear();
             }
         });

@@ -35,6 +35,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:text="Draw the letter [R]. Connect the dots"
+        android:padding="20dp"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

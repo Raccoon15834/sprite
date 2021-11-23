@@ -21,7 +21,7 @@ public class MyCanvas extends View {
     Cloud[] clouds;
     Resources res  = getResources();
     VectorDrawableCompat island1, island2, ladder;
-    VectorDrawableCompat[] myBg;//todo wind affect
+    VectorDrawableCompat[] myBg;
 
     public MyCanvas(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -47,7 +47,7 @@ public class MyCanvas extends View {
                 island1.getBounds().top+4*ih/15);
         ladder = VectorDrawableCompat.create(res, R.drawable.ic_ladder, null);
         ladder.setBounds(island1.getBounds().right-iw/5, island1.getBounds().top + ih/6,
-                island1.getBounds().right, island2.getBounds().top+ ih/6);//todo set bounds
+                island1.getBounds().right, island2.getBounds().top+ ih/6);
 
         myBg = new VectorDrawableCompat[]{palmtree, island1, island2, ladder};
         mL = new Croc(getResources(), island1.getBounds().left + iw/15, island1.getBounds().top +ih/8,
@@ -61,14 +61,7 @@ public class MyCanvas extends View {
         for(VectorDrawableCompat i: myBg) i.draw(canvas);
         mL.draw(canvas);
         for(int i=clouds.length/2+1; i<clouds.length; i++) clouds[i].draw(canvas);
-
-
-//        VectorDrawableCompat i1 = island1;
-//        int w = i1.getIntrinsicWidth();
-//        int h = i1.getIntrinsicHeight();
-//        Rect i1bounds = i1.getBounds();
-//        canvas.drawCircle(40, 40, 50, new Paint(Color.GREEN));
-//        canvas.drawRect(i1bounds.left, i1bounds.top, i1bounds.left+50, i1bounds.top + 50, new Paint(Color.BLUE));
+        VectorDrawableCompat i1 = island1;
         invalidate();
     }
     public Croc getCroc() {

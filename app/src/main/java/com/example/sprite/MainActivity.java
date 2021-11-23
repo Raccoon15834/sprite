@@ -24,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         scrn = (MyCanvas)  findViewById(R.id.scrn);
-        startPaint();
+        //startPaint();
 
-        setUpArrows();//TODO rotate arrow images, fix restrictions, switch screen
+        setUpArrows();//TODO fix restrictions, switch screen
         //TODO  add letter r bmp, check how to start paint activity
     }
 
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         int w = i1.getIntrinsicWidth();
         int h = i1.getIntrinsicHeight();
         Rect i1bounds = i1.getBounds();
-        if (mL.contains(i1bounds.left+w/4, i1bounds.top + h/2)){
+        if (mL.contains(i1bounds.left+w/5, i1bounds.top+h/5)){
             mL.currFace = mL.BACKFACE;
             startPaint();
         }

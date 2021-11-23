@@ -19,12 +19,13 @@ import java.util.LinkedList;
 public class MyPaintCanvas extends View {
     LinkedList<Circle> myCircs;
     Bitmap bmp;
+    int h2, w2;
     public MyPaintCanvas(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         myCircs = new LinkedList<Circle>();
     }
 
-    public boolean checkAnswer() {//todo also check if there is enough circles in the first place
+    public boolean checkAnswer() {
         int len =0;
         int numTrue = 0;
         Iterator<Circle> it= myCircs.iterator();
@@ -33,11 +34,11 @@ public class MyPaintCanvas extends View {
             len++;
         }
         if (len==0) return false;
-        int percentageCorrect = (numTrue/len*100);
+        double percentageCorrect= numTrue/len;
         Log.i("percentage data", percentageCorrect+"%");
         Log.i("percentage data", len+" total");
         Log.i("percentage data", numTrue+" true");
-        if (percentageCorrect>80) return true;
+        if (percentageCorrect>0.80) return true;
         return false;
     }
 
@@ -48,10 +49,16 @@ public class MyPaintCanvas extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawColor(Color.BLACK);//background color
+        //canvas.drawColor(Color.BLACK);//background color
         bmp = Croc.drawableToBitmap(getResources().getDrawable(R.drawable.ic_letter));
         Rect wholeBmp = new Rect(0,0,bmp.getWidth(), bmp.getHeight());
-        canvas.drawBitmap(bmp, wholeBmp, canvas.getClipBounds(), null);
+        //canvas.drawBitmap(bmp, wholeBmp, canvas.getClipBounds(), null);
+        //test bounds
+        h2 = canvas.getHeight();
+        w2 = canvas.getWidth();
+        Rect position = new Rect(0,0,w2, h2);
+        canvas.drawBitmap(bmp, wholeBmp, position, null);
+
         Iterator<Circle> it= myCircs.iterator();
         while (it.hasNext()){
             it.next().draw(canvas);
@@ -70,11 +77,15 @@ public class MyPaintCanvas extends View {
             this.y = y;
         }
         public void draw(Canvas canvas){
-            canvas.drawCircle(x, y, s, new Paint(Color.YELLOW));//todo fix color
+            Paint paint = new Paint();
+            paint.setColor(Color.GREEN);
+            canvas.drawCircle(x, y, s, paint);
         }
-        public boolean overlap(Bitmap bmpLetter){//thick letter,
+        public boolean overlap(Bitmap bmpLetter){//check on letter, same coordinates on bitmap?
             //if letter has center of circle
-            if(bmpLetter.getPixel(x,y)==255) return false;
+
+            Log.i("percent pixel check:",bmpLetter.getPixel(x,y)+"");
+            if(bmpLetter.getPixel((int)(x),y)==0) return false; //transparent pixel, not on R
             return true;
         }
     }
